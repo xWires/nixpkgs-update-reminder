@@ -1,0 +1,9 @@
+[Unit]
+Description=Run nixpkgs-update-reminder every day while in a graphical session
+
+[Timer]
+OnUnitActiveSec=1d
+Unit=nixpkgs-update-reminder.service
+
+[Install]
+WantedBy=graphical-session.target

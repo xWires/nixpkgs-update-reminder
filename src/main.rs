@@ -40,7 +40,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("This system's nixpkgs is {days_since} days old");
 
     match days_since {
-        0..5 => {}, // Do nothing if it's been less than 5 days
+        0..5 => println!("Doing nothing because it has been less than 5 days"),
         5..7 => send_notification(&proxy, days_since, NotificationSeverity::Low).await?,
         7..14 => send_notification(&proxy, days_since, NotificationSeverity::Normal).await?,
         14.. => send_notification(&proxy, days_since, NotificationSeverity::Critical).await?,

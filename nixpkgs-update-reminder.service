@@ -1,0 +1,9 @@
+[Unit]
+Description=Send a notification if nixpkgs hasn't been updated recently
+
+[Service]
+Type=oneshot
+ExecStart=@bin@
+
+[Install]
+WantedBy=graphical-session.target
