@@ -13,7 +13,11 @@ pub async fn get_commit_date(owner: &str, repo: &str, commit_hash: &str) -> Resu
 
     let json: Value = serde_json::from_str(&response.text().await?)?;
 
-    let raw_commit_date = json["commit"]["committer"]["date"].as_str().ok_or("failed to get commit date from GitHub API response")?;
+    let raw_commit_date = json["commit"]["committer"]["date"].as_str();
 
-    Ok(DateTime::parse_from_str(raw_commit_date, "%+")?.to_utc())
+    if let Some(date) = raw_commit_date {
+        Ok(DateTime::parse_from_str(date, "%+")?.to_utc())
+    } else {
+        Err(format!("failed to get commit date from GitHub API response. Full response: {json}").into())
+    }
 }
