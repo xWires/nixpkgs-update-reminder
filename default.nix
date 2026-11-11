@@ -7,10 +7,6 @@ pkgs.rustPlatform.buildRustPackage {
 
   cargoLock.lockFile = ./Cargo.lock;
 
-  buildInputs = with pkgs; [
-    aws-lc
-  ];
-
   postInstall = ''
     install -Dm644 nixpkgs-update-reminder.service $out/lib/systemd/user/nixpkgs-update-reminder.service
     install -Dm644 nixpkgs-update-reminder.timer $out/lib/systemd/user/nixpkgs-update-reminder.timer
